@@ -1,6 +1,9 @@
 // require the discord.js module
 const Discord = require('discord.js');
 
+// config file required to run the bot
+const config = require('./config.json');
+
 // create a new Discord client
 const client = new Discord.Client();
 
@@ -11,4 +14,4 @@ client.once('ready', () => {
 });
 
 // login to Discord with your app's token
-client.login('NTAxOTY4NTcyOTk4NzQ2MTQz.XRCqnQ.NJzeoRaiGHEVh43Soaj-qYOO5DA');
+client.login(config.token);
