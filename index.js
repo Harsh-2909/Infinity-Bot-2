@@ -9,11 +9,8 @@ const { prefix, token } = require("./config.json");
 // create a new Discord client
 const client = new CommandoClient({
 	commandPrefix: prefix,
-	owner: 362645647545073685,
 	disableEveryone: true,
 });
-
-// const client = new Discord.Client();
 
 client.registry
 	.registerDefaultTypes()
@@ -28,7 +25,7 @@ client.registry
 // when the client is ready, run this code
 // this event will only trigger one time after logging in
 client.once("ready", () => {
-	console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
+	console.log(`Logged in as ${client.user.tag}!`);
 	client.user.setActivity("Pokemon Go");
 });
 
@@ -39,6 +36,8 @@ client.once("ready", () => {
 // 		message.channel.send("Boop.");
 // 	}
 // });
+
+client.on("error", console.error);
 
 // login to Discord with your app's token
 client.login(token);
