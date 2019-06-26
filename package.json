@@ -8,12 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "fhdajfjfd"
+    "url": "https://github.com/Harsh-2909/Infinity-Bot-2/tree/master"
   },
   "author": "Harsh Agarwal",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.5.1",
+    "discord.js-commando": "github:discordjs/Commando",
     "opusscript": "0.0.6"
   }
 }
