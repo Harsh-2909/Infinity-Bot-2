@@ -13,7 +13,10 @@ module.exports = class LogoutCommand extends Command {
 	}
 	run(message) {
 		message.say('Logging out...');
-		this.client.destroy();
+		setTimeout(() => {
+			message.say('Bot Successfully logged out.');
+			this.client.destroy();
+		}, 3000);
 	}
 
 };

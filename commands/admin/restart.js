@@ -14,9 +14,14 @@ module.exports = class RestartCommand extends Command {
 	}
 	run(message) {
 		message.say('Logging out...');
-		this.client.destroy();
-		this.client.login(token);
-		message.say(`Bot has restarted successfully as ${this.client.user.tag}`);
+		setTimeout(() => {
+			message.say('Bot Successfully logged out.');
+			this.client.destroy();
+		}, 3000);
+		setTimeout(() => {
+			this.client.login(token);
+			return message.say(`Bot has restarted successfully as ${this.client.user.tag}`);
+		}, 6000);
 	}
 
 };
