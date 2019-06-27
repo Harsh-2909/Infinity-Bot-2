@@ -16,7 +16,7 @@ const client = new CommandoClient({
 client.registry
 	.registerDefaultTypes()
 	.registerGroups([
-		['first', 'Your First Command Group'],
+		['admin', 'Admin commands to administer your server'],
 		['second', 'Your Second Command Group'],
 	])
 	.registerDefaultGroups()
@@ -25,12 +25,12 @@ client.registry
 
 // when the client is ready, run this code
 // this event will only trigger one time after logging in
-client.once('ready', () => {
+client.once('ready', async () => {
 	console.log(`Logged in as ${client.user.tag}!`);
-	client.user.setActivity('Pokemon Go');
+	client.user.setActivity(`${client.guilds.size} guilds || !help`, { type: 'STREAMING' });
 });
 
-client.on('message', message =>{
+client.on('message', async message =>{
 	if(message.author.bot) { return; }
 	if(message.content === `<@${botID}>`) {
 		message.channel.send(`My prefix in this server is \`\`${prefix}\`\`. To learn how to use the bot, use the \`\`${prefix}help\`\` command.`);
