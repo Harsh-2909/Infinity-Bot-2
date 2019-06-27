@@ -9,6 +9,7 @@ module.exports = class ServerInfoCommand extends Command {
 			aliases: ['guildinfo'],
 			memberName: 'serverinfo',
 			description: 'Displays the server information.',
+			guildOnly: true,
 		});
 	}
 	// TODO: Add more fields and proper Server description with proper formatting.
