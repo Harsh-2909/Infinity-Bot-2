@@ -4,29 +4,24 @@ module.exports = class SayCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'say',
-			aliases: ['parrot', 'copy'],
 			group: 'second',
 			memberName: 'say',
 			description: 'Replies with the text you provide.',
+			clientPermissions: ['MANAGE_MESSAGES'],
+			userPermissions: ['MANAGE_MESSAGES'],
 			args: [
 				{
 					key: 'text',
 					prompt: 'What text would you like the bot to say?',
 					type: 'string',
-				},
-				{
-					key: 'otherThing',
-					prompt: 'What is this other useless thing?',
-					type: 'string',
-					default: 'dog',
-					oneOf: ['dog', 'cat'],
-					validate: otherThing => otherThing.length < 200,
+					default: 'Hello World',
 				},
 			],
 		});
 	}
 
-	run(message, { text, otherThing }) {
-		return message.reply(`${text} ${otherThing}`);
+	run(message, { text }) {
+		message.delete().catch();
+		return message.say(text);
 	}
 };
