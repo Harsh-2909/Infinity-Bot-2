@@ -5,7 +5,7 @@ module.exports = class MeowCommand extends Command {
 		super(client, {
 			name: 'meow',
 			aliases: ['kitty-cat'],
-			group: 'first',
+			group: 'second',
 			memberName: 'meow',
 			description: 'Replies with a meow, kitty cat.',
 			throttling: {
