@@ -20,7 +20,7 @@ module.exports = class BanCommand extends Command {
 				{
 					key: 'User',
 					prompt: 'Who would you like to unban in the server?',
-					type: 'user',
+					type: 'string',
 				},
 				{
 					key: 'reason',
@@ -31,26 +31,36 @@ module.exports = class BanCommand extends Command {
 			],
 		});
 	}
-	run(message, { User, reason }) {
-		const bInfo = message.guild.fetchBans(User);
-		if (!bInfo) { return message.say('Couldn\'t find user to unban.'); }
-
-		// if(bInfo.hasPermission('BAN_MEMBERS')) { return message.say('That person can\'t be banned.'); }
+	async run(message, { User, reason }) {
+		const bannedUsers = await message.guild.fetchBans();
+		let user;
+		if (bannedUsers.find(t => t.tag === User) !== null) {
+			user = bannedUsers.find(t => t.tag === User);
+		}
+		else if (bannedUsers.find(u => u.username === User) !== null) {
+			user = bannedUsers.find(u => u.username === User);
+		}
+		else if (bannedUsers.get(User) !== null) {
+			user = bannedUsers.get(User);
+		}
+		if (user === null || user === undefined) {
+			await message.react('❌');
+			return message.say('User not Found or that user has not been banned.');
+		}
+		await message.delete(1);
 
 		const unbannedEmbed = new RichEmbed()
 			.setAuthor('Unban')
 			.setColor('157157')
-			.addField('Unbanned User', bInfo.user)
-			.addField('Unbanned User ID', bInfo.user.id)
+			.addField('Unbanned User', user)
+			.addField('Unbanned User ID', user.id)
 			.addField('Unbanned By', message.author)
 			.addField('Moderator ID', message.author.id)
 			.addField('Channel', message.channel)
 			.addField('Time', message.createdAt)
 			.addField('Reason', reason);
 
-		message.guild.unban(reason);
-		/* bInfo.user.send(`You have been unbanned in **${message.guild.name}** by **${message.author.tag}**.
-**Reason:** ${reason}`); */
+		message.guild.unban(user, reason);
 		const unbannedChannel = message.guild.channels.find('name', 'logs');
 		if(!unbannedChannel) {
 			message.say('Couldn\'t find the appropriate channel. Please make one to store the reports.').then(msg => msg.delete(5000));
@@ -60,8 +70,9 @@ module.exports = class BanCommand extends Command {
 			unbannedChannel.send(unbannedEmbed);
 		}
 
-		message.say(`${bInfo.user.tag} unbanned successfully.`);
-		return message.delete().catch(O_o=>{ console.log(O_o); });
+		message.say(`${user.tag} unbanned successfully.`);
+		user.send(unbannedEmbed.setFooter('You can join back to the server now.')).catch(err => console.log(err));
+		// return message.delete().catch(O_o=>{ console.log(O_o); });
 	}
 
 };
