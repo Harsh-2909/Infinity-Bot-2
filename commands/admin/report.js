@@ -46,15 +46,16 @@ module.exports = class ReportCommand extends Command {
 			.addField('Reason', reason);
 
 
-		const reportChannel = message.guild.channels.find('name', 'reports');
+		const reportChannel = message.guild.channels.find('name', 'logs');
 		if(!reportChannel) {
-			message.say('Couldn\'t find "reports" channel. Please make one to store the reports.');
+			message.say('Couldn\'t find the appropriate channel. Please make one to store the reports.').then(msg => msg.delete(5000));
 			message.say(reportEmbed);
-			return message.delete().catch(O_o=>{ console.log(O_o); });
+		}
+		else{
+			reportChannel.send(reportEmbed);
 		}
 
-		reportChannel.send(reportEmbed);
-		message.say(`${reUser} reported successfully.`);
+		message.say(`${reUser.tag} reported successfully.`);
 		return message.delete().catch(O_o=>{ console.log(O_o); });
 	}
 
