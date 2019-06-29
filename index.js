@@ -16,7 +16,7 @@ const client = new CommandoClient({
 client.registry
 	.registerDefaultTypes()
 	.registerGroups([
-		['admin', 'Admin commands to administer your server'],
+		['moderation', 'Moderation commands to administer your server'],
 		['second', 'Your Second Command Group'],
 	])
 	.registerDefaultGroups()
