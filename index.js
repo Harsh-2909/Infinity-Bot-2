@@ -27,9 +27,11 @@ client.registry
 // this event will only trigger one time after logging in
 client.once('ready', async () => {
 	console.log(`Logged in as ${client.user.tag}!`);
-	client.user.setActivity(`${client.guilds.size} guilds || !help`, { type: 'STREAMING' });
+	client.user.setActivity(`${client.guilds.size} guilds | ${prefix}help`, { type: 'WATCHING' });
 });
 
+// TODO: Convert all the commands into async commands.
+// Guide to do it is https://dragonfire535.gitbooks.io/discord-js-commando-beginners-guide/content/using-an-async-run-method.html
 client.on('message', async message =>{
 	if(message.author.bot) { return; }
 	if(message.content === `<@${botID}>`) {

@@ -4,7 +4,7 @@ module.exports = class LogoutCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'logout',
-			aliases: ['turn-off', 'destroy'],
+			aliases: ['turn-off', 'destroy', 'terminate'],
 			group: 'admin',
 			memberName: 'logout',
 			description: 'Owner only command used to turn off bot.',
