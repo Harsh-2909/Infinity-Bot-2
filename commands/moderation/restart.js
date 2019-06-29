@@ -6,7 +6,7 @@ module.exports = class RestartCommand extends Command {
 		super(client, {
 			name: 'restart',
 			aliases: ['reboot', 'boot-up', 'reset'],
-			group: 'admin',
+			group: 'moderation',
 			memberName: 'restart',
 			description: 'Owner only command used to restart the bot.',
 			ownerOnly: true,

@@ -6,9 +6,9 @@ module.exports = class KickCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'kick',
-			group: 'admin',
+			group: 'moderation',
 			memberName: 'kick',
-			description: 'Kicks out a user.',
+			description: 'Kicks out the metioned user.',
 			guildOnly: true,
 			throttling: {
 				usages: 1,

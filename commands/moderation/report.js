@@ -5,7 +5,7 @@ module.exports = class ReportCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'report',
-			group: 'admin',
+			group: 'moderation',
 			memberName: 'report',
 			description: 'Reports a user.',
 			throttling: {

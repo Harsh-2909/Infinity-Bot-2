@@ -6,9 +6,9 @@ module.exports = class BanCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'ban',
-			group: 'admin',
+			group: 'moderation',
 			memberName: 'ban',
-			description: 'Bans out a user.',
+			description: 'Bans out the mentioned user from the server.',
 			guildOnly: true,
 			throttling: {
 				usages: 1,

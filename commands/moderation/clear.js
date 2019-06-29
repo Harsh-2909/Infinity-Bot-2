@@ -5,7 +5,7 @@ module.exports = class ReportCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'clear',
-			group: 'admin',
+			group: 'moderation',
 			memberName: 'clear',
 			aliases: ['clean', 'purge', 'delete'],
 			description: 'Clears out a certain number of messages.',
