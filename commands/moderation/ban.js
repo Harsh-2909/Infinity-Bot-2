@@ -48,7 +48,7 @@ module.exports = class BanCommand extends Command {
 
 		bUser.ban(reason);
 		bUser.send(`You have been banned in **${message.guild.name}** by **${message.author.tag}**.
-**Reason:** ${reason}`);
+**Reason:** ${reason}`).catch(err => { console.log(err); });
 		const bannedChannel = message.guild.channels.find('name', 'logs');
 		if(!bannedChannel) {
 			message.say('Couldn\'t find the appropriate channel. Please make one to store the reports.').then(msg => msg.delete(5000));

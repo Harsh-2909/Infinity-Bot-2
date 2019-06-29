@@ -48,7 +48,7 @@ module.exports = class KickCommand extends Command {
 
 		kUser.kick(reason);
 		kUser.send(`You have been kicked out of **${message.guild.name}** by **${message.author.tag}**.
-**Reason:** ${reason}`);
+**Reason:** ${reason}`).catch(err => { console.log(err); });
 		const kickedChannel = message.guild.channels.find('name', 'logs');
 		if(!kickedChannel) {
 			message.say('Couldn\'t find the appropriate channel. Please make one to store the reports.').then(msg => msg.delete(5000));
