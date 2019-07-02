@@ -1,6 +1,6 @@
 const {	Command } = require('discord.js-commando');
 const { RichEmbed } = require('discord.js');
-const { config } = require('../../config.json');
+const config = require('../../config.json');
 
 module.exports = class ServerInfoCommand extends Command {
 	constructor(client) {
@@ -13,19 +13,23 @@ module.exports = class ServerInfoCommand extends Command {
 			guildOnly: true,
 		});
 	}
-	// TODO: Add more fields and proper Server description with proper formatting.
+
 	async run(message) {
 		const sicon = message.guild.iconURL;
+		const date = message.guild.createdAt;
 		const serverembed = new RichEmbed()
 			.setAuthor(message.guild.name)
-			.setDescription('Server Information')
 			.setColor(config.color.blue)
 			.setThumbnail(sicon)
-			.addField('Server Name ', message.guild.name)
-			.addField('Server ID ', message.guild.id)
-			.addField('Created On ', message.guild.createdAt)
-			.addField('You joined On', message.member.joinedAt)
-			.addField('Total Members ', message.guild.memberCount);
+			.addField('Server ID', message.guild.id)
+			.addField('Owner', message.guild.owner)
+			.addField('Owner ID', message.guild.ownerID)
+			.addField('Users', message.guild.memberCount)
+			.addField('Channels', message.guild.channels.size)
+			.addField('Roles', message.guild.roles.size)
+			.addField('Region', message.guild.region)
+			.addField('Created On', date.toDateString())
+			.addField('You joined On', message.member.joinedAt.toDateString());
 
 		return message.say(serverembed);
 	}
