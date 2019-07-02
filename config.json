@@ -1,4 +1,12 @@
 {
 	"prefix": "!",
-	"token": "your-token-goes-here"
+	"token": "your-token-goes-here",
+	"owner": "your-discord-id",
+	"botID": "bot-id",
+	"color": {
+		"red": "#E44236",
+		"blue": "#0A79DF",
+		"green": "#26ae60"
+	},
+	"log_channel": "logs"
 }
