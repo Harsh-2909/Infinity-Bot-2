@@ -17,7 +17,7 @@ client.registry
 	.registerDefaultTypes()
 	.registerGroups([
 		['moderation', 'Moderation commands to administer your server'],
-		['second', 'Your Second Command Group'],
+		['misc', 'A bunch of miscellaneous commands for info and fun'],
 	])
 	.registerDefaultGroups()
 	.registerDefaultCommands()
@@ -30,8 +30,6 @@ client.once('ready', async () => {
 	client.user.setActivity(`${client.guilds.size} guilds | ${prefix}help`, { type: 'WATCHING' });
 });
 
-// TODO: Convert all the commands into async commands.
-// Guide to do it is https://dragonfire535.gitbooks.io/discord-js-commando-beginners-guide/content/using-an-async-run-method.html
 client.on('message', async message =>{
 	if(message.author.bot) { return; }
 	if(message.content === `<@${botID}>`) {
