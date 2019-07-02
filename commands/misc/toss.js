@@ -5,7 +5,7 @@ module.exports = class TossCommand extends Command {
 		super(client, {
 			name: 'toss',
 			aliases: ['flip'],
-			group: 'second',
+			group: 'misc',
 			memberName: 'toss',
 			throttling: {
 				usages: 1,
@@ -24,7 +24,7 @@ module.exports = class TossCommand extends Command {
 		});
 	}
 	// TODO: Change the formatting of the output.
-	run(message, { number }) {
+	async run(message, { number }) {
 		let heads = 0, tails = 0;
 		for(let i = 0; i < number; i++) {
 			const res = Math.floor(Math.random() * 2);

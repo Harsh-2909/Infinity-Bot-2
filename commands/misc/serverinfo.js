@@ -1,11 +1,12 @@
 const {	Command } = require('discord.js-commando');
 const { RichEmbed } = require('discord.js');
+const { config } = require('../../config.json');
 
 module.exports = class ServerInfoCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'serverinfo',
-			group: 'second',
+			group: 'misc',
 			aliases: ['guildinfo'],
 			memberName: 'serverinfo',
 			description: 'Displays the server information.',
@@ -13,12 +14,12 @@ module.exports = class ServerInfoCommand extends Command {
 		});
 	}
 	// TODO: Add more fields and proper Server description with proper formatting.
-	run(message) {
+	async run(message) {
 		const sicon = message.guild.iconURL;
 		const serverembed = new RichEmbed()
 			.setAuthor(message.guild.name)
 			.setDescription('Server Information')
-			.setColor('#0000FF')
+			.setColor(config.color.blue)
 			.setThumbnail(sicon)
 			.addField('Server Name ', message.guild.name)
 			.addField('Server ID ', message.guild.id)

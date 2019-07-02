@@ -4,7 +4,7 @@ module.exports = class SayCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'say',
-			group: 'second',
+			group: 'misc',
 			memberName: 'say',
 			description: 'Replies with the text you provide.',
 			clientPermissions: ['MANAGE_MESSAGES'],
@@ -20,8 +20,8 @@ module.exports = class SayCommand extends Command {
 		});
 	}
 
-	run(message, { text }) {
-		message.delete().catch();
+	async run(message, { text }) {
+		message.delete().catch(console.error());
 		return message.say(text);
 	}
 };
