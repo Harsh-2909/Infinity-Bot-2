@@ -1,8 +1,8 @@
 const {	Command } = require('discord.js-commando');
 const { RichEmbed } = require('discord.js');
-// const { RichEmbed } = require('discord.js');
+const { config } = require('../../config.json');
 
-module.exports = class BanCommand extends Command {
+module.exports = class UnBanCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'unban',
@@ -51,7 +51,7 @@ module.exports = class BanCommand extends Command {
 
 		const unbannedEmbed = new RichEmbed()
 			.setAuthor('Unban')
-			.setColor('157157')
+			.setColor(config.color.green)
 			.addField('Unbanned User', user)
 			.addField('Unbanned User ID', user.id)
 			.addField('Unbanned By', message.author)
@@ -61,7 +61,7 @@ module.exports = class BanCommand extends Command {
 			.addField('Reason', reason);
 
 		message.guild.unban(user, reason);
-		const unbannedChannel = message.guild.channels.find('name', 'logs');
+		const unbannedChannel = message.guild.channels.find('name', config.log_channel);
 		if(!unbannedChannel) {
 			message.say('Couldn\'t find the appropriate channel. Please make one to store the reports.').then(msg => msg.delete(5000));
 			message.say(unbannedEmbed);
@@ -71,8 +71,7 @@ module.exports = class BanCommand extends Command {
 		}
 
 		message.say(`${user.tag} unbanned successfully.`);
-		user.send(unbannedEmbed.setFooter('You can join back to the server now.')).catch(err => console.log(err));
-		// return message.delete().catch(O_o=>{ console.log(O_o); });
+		user.send(unbannedEmbed.setFooter('You can join back to the server now.')).catch(console.error());
 	}
 
 };

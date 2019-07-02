@@ -1,5 +1,4 @@
 const {	Command } = require('discord.js-commando');
-// const { RichEmbed } = require('discord.js');
 
 module.exports = class ReportCommand extends Command {
 	constructor(client) {
@@ -27,10 +26,10 @@ module.exports = class ReportCommand extends Command {
 			],
 		});
 	}
-	run(message, { amount }) {
-		message.channel.bulkDelete(amount).then(() => {
-			message.say(`Cleared ${amount} messages.`).then(msg => msg.delete(3000));
-		});
+	async run(message, { amount }) {
+		message.channel.bulkDelete(amount);
+		const msg = await message.say(`Cleared ${amount} messages.`);
+		msg.delete(3000);
 	}
 
 };

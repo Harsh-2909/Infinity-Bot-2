@@ -1,6 +1,6 @@
 const {	Command } = require('discord.js-commando');
 const { RichEmbed } = require('discord.js');
-// const { RichEmbed } = require('discord.js');
+const { config } = require('../../config.json');
 
 module.exports = class BanCommand extends Command {
 	constructor(client) {
@@ -30,14 +30,14 @@ module.exports = class BanCommand extends Command {
 			],
 		});
 	}
-	run(message, { User, reason }) {
+	async run(message, { User, reason }) {
 		const bUser = message.guild.member(User);
 		if (!bUser) { return message.say('Couldn\'t find user.'); }
 		if(bUser.hasPermission('BAN_MEMBERS')) { return message.say('That person can\'t be banned.'); }
 
 		const bannedEmbed = new RichEmbed()
 			.setAuthor('Ban')
-			.setColor('157157')
+			.setColor(config.color.red)
 			.addField('Banned User', bUser)
 			.addField('Banned User ID', bUser.id)
 			.addField('Banned By', message.author)
@@ -48,8 +48,8 @@ module.exports = class BanCommand extends Command {
 
 		bUser.ban(reason);
 		bUser.send(`You have been banned in **${message.guild.name}** by **${message.author.tag}**.
-**Reason:** ${reason}`).catch(err => { console.log(err); });
-		const bannedChannel = message.guild.channels.find('name', 'logs');
+**Reason:** ${reason}`).catch(console.error());
+		const bannedChannel = message.guild.channels.find('name', config.log_channel);
 		if(!bannedChannel) {
 			message.say('Couldn\'t find the appropriate channel. Please make one to store the reports.').then(msg => msg.delete(5000));
 			message.say(bannedEmbed);
@@ -59,7 +59,7 @@ module.exports = class BanCommand extends Command {
 		}
 
 		message.say(`${bUser.user.tag} banned successfully.`);
-		return message.delete().catch(O_o=>{ console.log(O_o); });
+		return message.delete().catch(console.error());
 	}
 
 };

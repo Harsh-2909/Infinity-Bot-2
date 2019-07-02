@@ -1,5 +1,6 @@
 const {	Command } = require('discord.js-commando');
 const { RichEmbed } = require('discord.js');
+const { config } = require('../../config.json');
 
 module.exports = class ReportCommand extends Command {
 	constructor(client) {
@@ -29,8 +30,8 @@ module.exports = class ReportCommand extends Command {
 			],
 		});
 	}
-	// TODO: Try to make the report channel set by user and not hardcoded.
-	run(message, { User, reason }) {
+
+	async run(message, { User, reason }) {
 		const reUser = message.guild.member(User);
 		if (!reUser) { return message.say('Couldn\'t find user.'); }
 
@@ -46,7 +47,7 @@ module.exports = class ReportCommand extends Command {
 			.addField('Reason', reason);
 
 
-		const reportChannel = message.guild.channels.find('name', 'logs');
+		const reportChannel = message.guild.channels.find('name', config.log_channel);
 		if(!reportChannel) {
 			message.say('Couldn\'t find the appropriate channel. Please make one to store the reports.').then(msg => msg.delete(5000));
 			message.say(reportEmbed);
@@ -56,7 +57,7 @@ module.exports = class ReportCommand extends Command {
 		}
 
 		message.say(`${reUser.tag} reported successfully.`);
-		return message.delete().catch(O_o=>{ console.log(O_o); });
+		return message.delete().catch(console.error());
 	}
 
 };
