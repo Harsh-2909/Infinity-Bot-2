@@ -1,6 +1,6 @@
 const {	Command } = require('discord.js-commando');
 const { RichEmbed } = require('discord.js');
-const { config } = require('../../config.json');
+const config = require('../../config.json');
 
 module.exports = class BotInfoCommand extends Command {
 	constructor(client) {

@@ -20,7 +20,7 @@ module.exports = class EightBallCommand extends Command {
 			],
 		});
 	}
-	// TODO: Add more fields and proper bot description with proper formatting.
+
 	async run(message) {
 		const replies = ['Without a doubt', 'Ask again later', 'Outlook good', 'Don\'t count on it', 'Yes, definitely', 'Signs point to yes', 'Yes', 'No', 'My sources say no', 'You may rely on it', 'Concentrate and ask again', 'It is certain'];
 		const result = Math.floor(Math.random() * replies.length);
